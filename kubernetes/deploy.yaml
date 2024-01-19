@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversor-moeda-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: conversor-moeda-app
+  template:
+    metadata:
+      labels:
+        app: conversor-moeda-app
+    spec:
+      containers:
+        - name: conversor-moeda-container
+          image: wpalmeida/conversor-moeda-app:latest
+          ports:
+            - containerPort: 5000

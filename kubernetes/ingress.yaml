@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: conversor-moeda-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+  - hosts:
+    - conversor-moeda.guiadodevops.com.br
+    secretName: conversor-moeda-tls
+  rules:
+    - host: conversor-moeda.guiadodevops.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: conversor-moeda-service
+                port:
+                  number: 80
