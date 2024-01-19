@@ -6,9 +6,20 @@ app = Flask(__name__)
 def obter_taxa_de_cambio(base_currency, target_currency):
     url = f'https://api.exchangeratesapi.io/latest?base={base_currency}&symbols={target_currency}'
     response = requests.get(url)
+    
+    if response.status_code != 200:
+        # Tratar o caso em que a API retorna um status diferente de 200
+        raise Exception(f"Erro na requisição à API: {response.status_code}")
+
     dados = response.json()
+
+    if 'rates' not in dados:
+        # Tratar o caso em que a chave 'rates' não está presente na resposta
+        raise Exception("Resposta da API não contém a chave 'rates'")
+
     taxa = dados['rates'][target_currency]
     return taxa
+
 
 def converter_moeda(valor, taxa):
     return valor * taxa
