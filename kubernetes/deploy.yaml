@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: conversor-moeda-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: conversor-moeda-app
