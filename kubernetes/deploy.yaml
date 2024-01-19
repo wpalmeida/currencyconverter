@@ -17,3 +17,4 @@ spec:
           image: wpalmeida/conversor-moeda-app:latest
           ports:
             - containerPort: 5000
+          imagePullPolicy: Always
